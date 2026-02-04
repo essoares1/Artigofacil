@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Editor de Artigo Científico — Modelo Volpato</title>
+  <style>
+    :root { --w: 1100px; }
+    body { font-family: Arial, Helvetica, sans-serif; margin: 0; background: #f7f7f7; color: #111; }
+    header { background:#111; color:#fff; padding: 18px 16px; }
+    header .wrap, main .wrap, footer .wrap { max-width: var(--w); margin: 0 auto; }
+    h1 { margin: 0; font-size: 18px; font-weight: 700; }
+    p.sub { margin: 6px 0 0; font-size: 13px; opacity: .9; }
+
+    main { padding: 18px 16px 30px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: #fff; border: 1px solid #e6e6e6; border-radius: 10px;
+      padding: 12px; box-shadow: 0 1px 0 rgba(0,0,0,.03);
+    }
+    .card h2 { margin: 0 0 8px; font-size: 15px; }
+    label { display:block; font-size: 12px; margin: 10px 0 6px; color:#333; }
+    input[type="text"] {
+      width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d7d7d7;
+      font-size: 13px; box-sizing: border-box;
+    }
+    textarea {
+      width: 100%; min-height: 150px; resize: vertical;
+      padding: 10px; border-radius: 8px; border: 1px solid #d7d7d7;
+      font-size: 13px; line-height: 1.35; box-sizing: border-box;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    .row { display:flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .row > * { flex: 1; }
+    .actions {
+      display:flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      margin: 16px 0 0;
+    }
+    button {
+      appearance: none; border: 0; cursor: pointer; border-radius: 10px;
+      padding: 12px 14px; font-weight: 700; font-size: 13px;
+    }
+    .primary { background:#0b5; color:#fff; }
+    .secondary { background:#eee; color:#111; }
+    .danger { background:#d33; color:#fff; }
+    .note { font-size: 12px; color:#444; margin-top: 8px; }
+    footer { padding: 14px 16px; color:#555; font-size: 12px; }
+    .small { font-size: 12px; opacity: .9; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Editor de Artigo Científico — Modelo Volpato</h1>
+      <p class="sub">Preencha cada etapa e baixe um arquivo (.txt) com o artigo montado e organizado.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+
+      <div class="card">
+        <h2>Metadados</h2>
+        <div class="grid">
+          <div>
+            <label for="title">Título</label>
+            <input id="title" type="text" placeholder="Digite o título do artigo" />
+          </div>
+          <div>
+            <label for="authors">Autor(es) e afiliação</label>
+            <input id="authors" type="text" placeholder="Ex.: Evandro Soares — Universidade X" />
+          </div>
+          <div>
+            <label for="date">Data</label>
+            <input id="date" type="text" placeholder="Ex.: 04/02/2026" />
+          </div>
+          <div>
+            <label for="keywords">Palavras-chave</label>
+            <input id="keywords" type="text" placeholder="Ex.: transição energética; flexibilidade; risco regulatório" />
+          </div>
+        </div>
+
+        <label for="abstract">Resumo</label>
+        <textarea id="abstract" placeholder="Escreva o resumo (150–250 palavras, se desejar)"></textarea>
+      </div>
+
+      <div style="height: 12px;"></div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>1) Fenômeno observado (realidade)</h2>
+          <textarea id="phenomenon" placeholder="Descreva o fenômeno empírico observado, sem 'opinião', e com foco no que é observável."></textarea>
+        </div>
+
+        <div class="card">
+          <h2>2) Problema científico (lacuna cognitiva)</h2>
+          <textarea id="problem" placeholder="Formule a lacuna: o que ainda não se sabe/ não está claro."></textarea>
+        </div>
+
+        <div class="card">
+          <h2>3) Pergunta científica</h2>
+          <textarea id="question" placeholder="Escreva 1 pergunta central direta, respondível por dados."></textarea>
+        </div>
+
+        <div class="card">
+          <h2>4) Hipóteses (respostas provisórias)</h2>
+          <textarea id="hypotheses" placeholder="Liste hipóteses testáveis (H1, H2...), com direção clara."></textarea>
+        </div>
+
+        <div class="card">
+          <h2>5) Método (como testar/refutar)</h2>
+          <textarea id="methods" placeholder="Explique dados, amostra, variáveis, desenho, modelos, estratégia de identificação e controles."></textarea>
+        </div>
+
+        <div class="card">
+          <h2>6) Resultados (evidências)</h2>
+          <textarea id="results" placeholder="Cole ou descreva resultados empíricos: tabelas (em texto), estimativas, sinais, significâncias."></textarea>
+        </div>
+
+        <div class="card">
+          <h2>7) Discussão (interpretação científica)</h2>
+          <textarea id="discussion" placeholder="Interprete resultados: confirma/nega hipóteses? por quê? como dialoga com literatura? limitações?"></textarea>
+        </div>
+
+        <div class="card">
+          <h2>8) Conclusão (novo conhecimento + próximos passos)</h2>
+          <textarea id="conclusion" placeholder="Síntese do que agora se sabe; implicações; limites; agenda futura."></textarea>
+        </div>
+      </div>
+
+      <div style="height: 12px;"></div>
+
+      <div class="card">
+        <h2>Referências (ABNT / outras)</h2>
+        <textarea id="references" placeholder="Cole suas referências aqui (uma por parágrafo/linha)."></textarea>
+
+        <div class="actions">
+          <div class="row" style="flex: 2;">
+            <div>
+              <label for="filename">Nome do arquivo (sem extensão)</label>
+              <input id="filename" type="text" value="artigo_modelo_volpato" />
+              <div class="note">O download será em .txt (compatível com Word/Docs).</div>
+            </div>
+          </div>
+
+          <div class="row" style="flex: 1; justify-content:flex-end;">
+            <button class="secondary" id="btnPreview" type="button">Pré-visualizar</button>
+            <button class="primary" id="btnDownload" type="button">Download</button>
+            <button class="danger" id="btnClear" type="button">Limpar</button>
+          </div>
+        </div>
+
+        <div class="note small" id="status"></div>
+      </div>
+
+      <div style="height: 12px;"></div>
+
+      <div class="card" id="previewCard" style="display:none;">
+        <h2>Pré-visualização</h2>
+        <textarea id="preview" readonly style="min-height: 380px;"></textarea>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="small">Dica: você pode copiar/colar o texto final no Word e aplicar formatação (ABNT, margens, notas, etc.).</div>
+    </div>
+  </footer>
+
+  <script>
+    function val(id) {
+      return (document.getElementById(id).value || "").trim();
+    }
+
+    function buildDoc() {
+      const title = val("title");
+      const authors = val("authors");
+      const date = val("date");
+      const keywords = val("keywords");
+      const abstract = val("abstract");
+
+      const sections = [
+        ["1) Fenômeno observado (realidade)", val("phenomenon")],
+        ["2) Problema científico (lacuna cognitiva)", val("problem")],
+        ["3) Pergunta científica", val("question")],
+        ["4) Hipóteses", val("hypotheses")],
+        ["5) Método", val("methods")],
+        ["6) Resultados", val("results")],
+        ["7) Discussão", val("discussion")],
+        ["8) Conclusão", val("conclusion")],
+        ["Referências", val("references")]
+      ];
+
+      const lines = [];
+      lines.push(title ? title.toUpperCase() : "TÍTULO (NÃO PREENCHIDO)");
+      if (authors) lines.push(authors);
+      if (date) lines.push(date);
+      lines.push("");
+
+      if (abstract) {
+        lines.push("RESUMO");
+        lines.push(abstract);
+        lines.push("");
+      }
+
+      if (keywords) {
+        lines.push("PALAVRAS-CHAVE");
+        lines.push(keywords);
+        lines.push("");
+      }
+
+      for (const [h, content] of sections) {
+        lines.push(h.toUpperCase());
+        lines.push(content ? content : "(NÃO PREENCHIDO)");
+        lines.push("");
+      }
+
+      return lines.join("\n");
+    }
+
+    function downloadText(filename, text) {
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename.endsWith(".txt") ? filename : (filename + ".txt");
+      document.body.appendChild(a);
+      a.click();
+
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 0);
+    }
+
+    function setStatus(msg) {
+      const el = document.getElementById("status");
+      el.textContent = msg || "";
+    }
+
+    document.getElementById("btnPreview").addEventListener("click", () => {
+      const text = buildDoc();
+      document.getElementById("preview").value = text;
+      document.getElementById("previewCard").style.display = "block";
+      setStatus("Pré-visualização gerada.");
+    });
+
+    document.getElementById("btnDownload").addEventListener("click", () => {
+      const filename = val("filename") || "artigo_modelo_volpato";
+      const text = buildDoc();
+      downloadText(filename, text);
+      setStatus("Download iniciado.");
+    });
+
+    document.getElementById("btnClear").addEventListener("click", () => {
+      const ids = [
+        "title","authors","date","keywords","abstract",
+        "phenomenon","problem","question","hypotheses",
+        "methods","results","discussion","conclusion","references"
+      ];
+      for (const id of ids) document.getElementById(id).value = "";
+      document.getElementById("previewCard").style.display = "none";
+      setStatus("Campos limpos.");
+    });
+
+    // Atalho: CTRL+S / CMD+S para baixar
+    window.addEventListener("keydown", (e) => {
+      const isSave = (e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === "s");
+      if (isSave) {
+        e.preventDefault();
+        const filename = val("filename") || "artigo_modelo_volpato";
+        downloadText(filename, buildDoc());
+        setStatus("Download iniciado (atalho CTRL/CMD+S).");
+      }
+    });
+  </script>
+</body>
+</html>
