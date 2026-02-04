@@ -5,49 +5,251 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Editor de Artigo Científico — Modelo Volpato</title>
   <style>
-    :root { --w: 1100px; }
-    body { font-family: Arial, Helvetica, sans-serif; margin: 0; background: #f7f7f7; color: #111; }
-    header { background:#111; color:#fff; padding: 18px 16px; }
-    header .wrap, main .wrap, footer .wrap { max-width: var(--w); margin: 0 auto; }
-    h1 { margin: 0; font-size: 18px; font-weight: 700; }
-    p.sub { margin: 6px 0 0; font-size: 13px; opacity: .9; }
+:root{
+  --bg: #0b1220;
+  --surface: rgba(255,255,255,.92);
+  --card: rgba(255,255,255,.96);
+  --text: #0f172a;
+  --muted: #475569;
+  --border: rgba(15, 23, 42, .10);
+  --shadow: 0 10px 30px rgba(2, 6, 23, .12);
+  --shadow-sm: 0 6px 16px rgba(2, 6, 23, .10);
 
-    main { padding: 18px 16px 30px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  --primary: #16a34a;
+  --primary-2: #22c55e;
+  --primary-ink: #ffffff;
 
-    .card {
-      background: #fff; border: 1px solid #e6e6e6; border-radius: 10px;
-      padding: 12px; box-shadow: 0 1px 0 rgba(0,0,0,.03);
-    }
-    .card h2 { margin: 0 0 8px; font-size: 15px; }
-    label { display:block; font-size: 12px; margin: 10px 0 6px; color:#333; }
-    input[type="text"] {
-      width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d7d7d7;
-      font-size: 13px; box-sizing: border-box;
-    }
-    textarea {
-      width: 100%; min-height: 150px; resize: vertical;
-      padding: 10px; border-radius: 8px; border: 1px solid #d7d7d7;
-      font-size: 13px; line-height: 1.35; box-sizing: border-box;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    }
-    .row { display:flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .row > * { flex: 1; }
-    .actions {
-      display:flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between;
-      margin: 16px 0 0;
-    }
-    button {
-      appearance: none; border: 0; cursor: pointer; border-radius: 10px;
-      padding: 12px 14px; font-weight: 700; font-size: 13px;
-    }
-    .primary { background:#0b5; color:#fff; }
-    .secondary { background:#eee; color:#111; }
-    .danger { background:#d33; color:#fff; }
-    .note { font-size: 12px; color:#444; margin-top: 8px; }
-    footer { padding: 14px 16px; color:#555; font-size: 12px; }
-    .small { font-size: 12px; opacity: .9; }
+  --secondary: #e2e8f0;
+  --secondary-ink: #0f172a;
+
+  --danger: #ef4444;
+  --danger-2: #f87171;
+  --danger-ink: #ffffff;
+
+  --ring: rgba(56, 189, 248, .45);
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --w: 1100px;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 10% 5%, rgba(34,197,94,.18), transparent 55%),
+    radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,.18), transparent 50%),
+    radial-gradient(900px 500px at 70% 90%, rgba(168,85,247,.14), transparent 55%),
+    linear-gradient(180deg, #070b14 0%, #0b1220 40%, #0b1220 100%);
+  min-height: 100vh;
+}
+
+header{
+  color: #fff;
+  padding: 26px 16px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+}
+
+header .wrap, main .wrap, footer .wrap{
+  max-width: var(--w);
+  margin: 0 auto;
+}
+
+h1{
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+p.sub{
+  margin: 8px 0 0;
+  font-size: 13px;
+  opacity: .92;
+  line-height: 1.35;
+}
+
+main{
+  padding: 18px 16px 34px;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 980px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
+.card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card h2{
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .25px;
+  color: #0b1220;
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+.card h2::before{
+  content:"";
+  width: 10px; height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(56,189,248,.9), rgba(34,197,94,.9));
+  box-shadow: 0 0 0 4px rgba(34,197,94,.12);
+}
+
+label{
+  display:block;
+  font-size: 12px;
+  margin: 10px 0 6px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+input[type="text"], textarea{
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(15, 23, 42, .14);
+  background: rgba(255,255,255,.98);
+  color: var(--text);
+  font-size: 13px;
+  padding: 10px 11px;
+  outline: none;
+  transition: box-shadow .18s ease, border-color .18s ease, transform .10s ease;
+}
+
+textarea{
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.45;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+input[type="text"]:focus, textarea:focus{
+  border-color: rgba(56,189,248,.65);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+input[type="text"]:hover, textarea:hover{
+  border-color: rgba(15, 23, 42, .22);
+}
+
+.row{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.row > *{ flex: 1; }
+
+.actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+button{
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .2px;
+  transition: transform .08s ease, filter .12s ease, box-shadow .18s ease;
+  box-shadow: 0 10px 24px rgba(2,6,23,.12);
+}
+
+button:active{ transform: translateY(1px) scale(.99); }
+
+.primary{
+  color: var(--primary-ink);
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+}
+
+.primary:hover{ filter: brightness(1.05); }
+
+.secondary{
+  color: var(--secondary-ink);
+  background: linear-gradient(135deg, #f1f5f9, var(--secondary));
+}
+
+.secondary:hover{ filter: brightness(1.02); }
+
+.danger{
+  color: var(--danger-ink);
+  background: linear-gradient(135deg, var(--danger), var(--danger-2));
+}
+
+.danger:hover{ filter: brightness(1.04); }
+
+.note{
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.35;
+}
+
+.small{ font-size: 12px; opacity: .9; }
+
+#status{
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(56,189,248,.10);
+  border: 1px solid rgba(56,189,248,.18);
+  color: #0b1220;
+}
+
+#previewCard textarea[readonly]{
+  background: rgba(2,6,23,.04);
+}
+
+footer{
+  padding: 14px 16px 20px;
+  color: rgba(255,255,255,.78);
+}
+
+footer .small{
+  opacity: .9;
+}
+
+/* Espaçamentos extras suaves */
+main .card + .card{ margin-top: 12px; }
+
+/* Barra visual no topo do container principal (opcional) */
+.wrap > .card:first-of-type{
+  position: relative;
+  overflow: hidden;
+}
+.wrap > .card:first-of-type::after{
+  content:"";
+  position:absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: linear-gradient(90deg, rgba(56,189,248,.9), rgba(34,197,94,.9), rgba(168,85,247,.9));
+}
   </style>
 </head>
 
